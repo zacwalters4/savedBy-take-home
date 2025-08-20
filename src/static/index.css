@@ -1,0 +1,37 @@
+* {
+    /* Adding the font to the entire document */
+    font-family: "Mina", sans-serif;
+}
+
+html, Body {
+    /* Ensuring the web page starts in the top left corner */
+    margin: 0;
+    padding: 0;
+}
+
+Header {
+    /* Making sure the header spans the entire length of the viewport, and making sure it stays fixed to the top while scrolling down the page */
+    width: 100vw;
+    height: 60px;
+    position: fixed;
+    /* Using display flex to align the header items and give it consistent scalability across screen sizes */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #67B6F9;
+}
+
+h1 {
+    margin-left: 32px;
+    font-size: 1.5rem;
+}
+
+.cart-button {
+    margin-right: 32px;
+    background-color: transparent;
+    height: 40px;
+    aspect-ratio: 1/1;
+    border: none;
+    background-image: url("shopping-cart.svg");
+    background-size: cover;
+}
