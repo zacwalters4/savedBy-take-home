@@ -24,8 +24,6 @@ async function setup() {
 	// API Endpoint: GET /products
 	// Returns: Array of product objects with id, title, price (in cents), and array of images
 	
-	// BONUS: Use the refactored sorting function for dynamic sort order
-	
 	// TODO: Fetch products from the API
 	// BONUS: Add error handling for the fetch request
 	try {
@@ -36,7 +34,8 @@ async function setup() {
 			let unsortedProducts = await response.json()
 			// TODO: Sort the products by price (low to high by default)
 			// products = unsortedProducts.sort((a, b) => a.price - b.price)
-			products = sortByPrice(unsortedProducts)
+			// BONUS: Use the refactored sorting function for dynamic sort order
+			products = thirdSortByPrice(unsortedProducts, 'asc')
 			console.log(products)
 			addProducts()
 
@@ -86,7 +85,6 @@ const createProductTile = (product) => {
         </div>`
 }
 
-
 /**
  * Sorts an array of products by price in ascending or descending order.
  *
@@ -123,3 +121,41 @@ function messyFunction(data1, data2) {
 	}
 	return t;
 }
+
+// Step 1: Rename all everything so that it's readable.
+
+function firstSortByPrice(products, sortOrder) {
+	let sortedProducts = [];
+	for (let i = 0; i < products.length; i++) {
+		sortedProducts.push(products[i]);
+	}
+	for (let i = 0; i < sortedProducts.length; i++) {
+		for (let j = i + 1; j < sortedProducts.length; j++) {
+			if ((sortOrder === "asc" && sortedProducts[i].price > sortedProducts[j].price) || (sortOrder === "desc" && sortedProducts[i].price < sortedProducts[j].price)) {
+				let temp = sortedProducts[i];
+				sortedProducts[i] = sortedProducts[j];
+				sortedProducts[j] = temp;
+			}
+		}
+	}
+	return sortedProducts;
+}
+
+// Step 2: Identified that the nested for loop performs a sort based on the sortOrder parameter to sort the array. Used a built in array method to simplify the entire function.
+
+function secondSortByPrice(products, sortOrder) {
+	if(sortOrder === 'asc') {
+		return products.sort((a, b) => a.price - b.price)
+	}
+	if(sortOrder === 'desc') {
+		return products.sort((a, b) => b.price - a.price)
+	}
+}
+
+// Step 3: Ideally a shallow copy of the array is used instead of modifying the array, and the double if statement can be refactored.
+
+function thirdSortByPrice(products, sortOrder) {
+	let direction = sortOrder === 'desc' ? -1 : 1
+	return [...products].sort((a, b) => direction * (a.price - b.price))
+}
+
