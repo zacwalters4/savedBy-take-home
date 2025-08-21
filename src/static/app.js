@@ -6,7 +6,6 @@ if (document.readyState !== "loading") {
     document.addEventListener("DOMContentLoaded", setup)
 }
 
-
 // --------------- QUERY SELECTORS ---------------
 
 let productsContainer = document.querySelector('.products-container')
