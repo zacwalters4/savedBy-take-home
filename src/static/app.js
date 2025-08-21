@@ -10,7 +10,21 @@ async function setup() {
 	// TODO: Implement search functionality
 	// BONUS: Use the refactored sorting function for dynamic sort order
 	// BONUS: Add error handling for the fetch request
+
+
+	// Fetch the products list from the API
+	try {
+		const response = await fetch('/products', {method: 'GET'})
+		if(!response.ok) {
+			throw new Error(`Response status: ${response.status}`)
+		}
+			const result = await response.json()
+			console.log(result)
+	} catch (error) {
+		console.error(error.message)
+	}
 }
+
 /**
  * Sorts an array of products by price in ascending or descending order.
  *

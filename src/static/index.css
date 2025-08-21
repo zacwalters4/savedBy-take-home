@@ -14,6 +14,7 @@ Header {
     width: 100vw;
     height: 60px;
     position: fixed;
+    z-index: 100;
     /* Using display flex to align the header items and give it consistent scalability across screen sizes */
     display: flex;
     justify-content: space-between;
@@ -27,6 +28,7 @@ h1 {
 }
 
 .cart-button {
+    /* Using a new svg because the one included would not work */
     margin-right: 32px;
     background-color: transparent;
     height: 40px;
@@ -34,4 +36,34 @@ h1 {
     border: none;
     background-image: url("shopping-cart.svg");
     background-size: cover;
+}
+
+main {
+    /* Ensuring the main section of the web page spans the entire width of the page and centers the items inside of it */
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-search {
+    margin-top: 90px;
+    height: 50px;
+    width: 98%;
+    font-size: 1.1rem;
+    border-color: #767676;
+    border-radius: 4px;
+}
+
+h2 {
+    /* Setting the width of the header to align it with the product search box */
+    width: 98%;
+    font-size: 1.8rem;
+}
+
+.products-container {
+    background-color: #67B6F9;
+    width: 98%;
+    
 }
