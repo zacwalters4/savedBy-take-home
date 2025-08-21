@@ -21,7 +21,7 @@ async function setup() {
 	// API Endpoint: GET /products
 	// Returns: Array of product objects with id, title, price (in cents), and array of images
 	
-	// TODO: Sort the products by price (low to high by default)
+	
 	// TODO: Implement search functionality
 	// BONUS: Use the refactored sorting function for dynamic sort order
 	// BONUS: Add error handling for the fetch request
@@ -34,7 +34,9 @@ async function setup() {
 		if(!response.ok) {
 			throw new Error(`Response status: ${response.status}`)
 		}
-			products = await response.json()
+			let unsortedProducts = await response.json()
+			// TODO: Sort the products by price (low to high by default)
+			products = sortByPrice(unsortedProducts)
 			console.log(products)
 			addProducts()
 			
@@ -65,8 +67,13 @@ const createProductTile = (product) => {
 // --------------- UTILITY FUNCTIONS ---------------
 
 const formatPrice = (price) => {
-	// Fucntion to format the price properly
+	// Format the price into the proper dollar amount
 	return (price/100).toFixed(2)
+}
+
+const sortByPrice = (products) => {
+	// Sort the products by price
+	return products.sort((a, b) => a.price - b.price)
 }
 
 
