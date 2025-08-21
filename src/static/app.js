@@ -34,7 +34,7 @@ async function setup() {
 			// TODO: Sort the products by price (low to high by default)
 			// products = unsortedProducts.sort((a, b) => a.price - b.price)
 			// BONUS: Use the refactored sorting function for dynamic sort order
-			products = thirdSortByPrice(unsortedProducts, 'asc')
+			products = sortByPrice(unsortedProducts, 'asc')
 			addProducts()
 
 			// Add listener for when a user types in the search box
@@ -49,11 +49,11 @@ const formatPrice = (price) => {
 	// Format the price into the proper dollar amount
 	return (price/100).toFixed(2)
 }
-
-const sortByPrice = (products) => {
-	// Sort the products by price
-	return products.sort((a, b) => a.price - b.price)
-}
+// Initial sortByPrice function before using the refactored messyFunction
+// const sortByPrice = (products) => {
+// 	// Sort the products by price
+// 	return products.sort((a, b) => a.price - b.price)
+// }
 
 // TODO: Implement search functionality
 const filterProducts = () => {
@@ -123,37 +123,37 @@ function messyFunction(data1, data2) {
 
 // Step 1: Rename all everything so that it's readable.
 
-function firstSortByPrice(products, sortOrder) {
-	let sortedProducts = [];
-	for (let i = 0; i < products.length; i++) {
-		sortedProducts.push(products[i]);
-	}
-	for (let i = 0; i < sortedProducts.length; i++) {
-		for (let j = i + 1; j < sortedProducts.length; j++) {
-			if ((sortOrder === "asc" && sortedProducts[i].price > sortedProducts[j].price) || (sortOrder === "desc" && sortedProducts[i].price < sortedProducts[j].price)) {
-				let temp = sortedProducts[i];
-				sortedProducts[i] = sortedProducts[j];
-				sortedProducts[j] = temp;
-			}
-		}
-	}
-	return sortedProducts;
-}
+// function firstSortByPrice(products, sortOrder) {
+// 	let sortedProducts = [];
+// 	for (let i = 0; i < products.length; i++) {
+// 		sortedProducts.push(products[i]);
+// 	}
+// 	for (let i = 0; i < sortedProducts.length; i++) {
+// 		for (let j = i + 1; j < sortedProducts.length; j++) {
+// 			if ((sortOrder === "asc" && sortedProducts[i].price > sortedProducts[j].price) || (sortOrder === "desc" && sortedProducts[i].price < sortedProducts[j].price)) {
+// 				let temp = sortedProducts[i];
+// 				sortedProducts[i] = sortedProducts[j];
+// 				sortedProducts[j] = temp;
+// 			}
+// 		}
+// 	}
+// 	return sortedProducts;
+// }
 
 // Step 2: Identified that the nested for loop performs a sort based on the sortOrder parameter to sort the array. Used a built in array method to simplify the entire function.
 
-function secondSortByPrice(products, sortOrder) {
-	if(sortOrder === 'asc') {
-		return products.sort((a, b) => a.price - b.price)
-	}
-	if(sortOrder === 'desc') {
-		return products.sort((a, b) => b.price - a.price)
-	}
-}
+// function secondSortByPrice(products, sortOrder) {
+// 	if(sortOrder === 'asc') {
+// 		return products.sort((a, b) => a.price - b.price)
+// 	}
+// 	if(sortOrder === 'desc') {
+// 		return products.sort((a, b) => b.price - a.price)
+// 	}
+// }
 
 // Step 3: Ideally a shallow copy of the array is used instead of modifying the original array, and the double if statement can also be refactored.
 
-function thirdSortByPrice(products, sortOrder) {
+function sortByPrice(products, sortOrder) {
 	let direction = sortOrder === 'desc' ? -1 : 1
 	return [...products].sort((a, b) => direction * (a.price - b.price))
 }
