@@ -35,7 +35,6 @@ async function setup() {
 			// products = unsortedProducts.sort((a, b) => a.price - b.price)
 			// BONUS: Use the refactored sorting function for dynamic sort order
 			products = thirdSortByPrice(unsortedProducts, 'asc')
-			console.log(products)
 			addProducts()
 
 			// Add listener for when a user types in the search box
