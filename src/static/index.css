@@ -90,3 +90,21 @@ h3 {
 p {
     margin: 0;
 }
+
+@media (max-width: 430px) {
+    .products-container {
+        width: 80%;
+    }
+
+    .product-tile {
+        width: 40%;
+    }
+
+    h1 {
+        margin-left: 15px;
+    }
+
+    .cart-button {
+        margin-right: 15px;
+    }
+}

@@ -8,6 +8,7 @@ if (document.readyState !== "loading") {
 
 
 // --------------- QUERY SELECTORS ---------------
+
 let productsContainer = document.querySelector('.products-container')
 let search = document.querySelector('.product-search')
 
@@ -17,19 +18,16 @@ let products
 
 // --------------- UTILITY FUNCTIONS ---------------
 
-
-
 async function setup() {
 
 	// START HERE
 	// API Endpoint: GET /products
 	// Returns: Array of product objects with id, title, price (in cents), and array of images
 	
-	// TODO: Implement search functionality
 	// BONUS: Use the refactored sorting function for dynamic sort order
+	
+	// TODO: Fetch products from the API
 	// BONUS: Add error handling for the fetch request
-
-	// TODO: Fetch products from the API with added error handling
 	try {
 		const response = await fetch('/products', {method: 'GET'})
 		if(!response.ok) {
@@ -60,6 +58,7 @@ const sortByPrice = (products) => {
 	return products.sort((a, b) => a.price - b.price)
 }
 
+// TODO: Implement search functionality
 const filterProducts = () => {
 	// Grab the current filter from the text box
 	let filter = search.value
