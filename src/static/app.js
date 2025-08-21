@@ -9,24 +9,25 @@ if (document.readyState !== "loading") {
 
 // --------------- QUERY SELECTORS ---------------
 let productsContainer = document.querySelector('.products-container')
+let search = document.querySelector('.product-search')
 
 // --------------- DATA MODEL ---------------
 
 let products
 
 // --------------- UTILITY FUNCTIONS ---------------
+
+
+
 async function setup() {
 
 	// START HERE
 	// API Endpoint: GET /products
 	// Returns: Array of product objects with id, title, price (in cents), and array of images
 	
-	
 	// TODO: Implement search functionality
 	// BONUS: Use the refactored sorting function for dynamic sort order
 	// BONUS: Add error handling for the fetch request
-
-
 
 	// TODO: Fetch products from the API with added error handling
 	try {
@@ -36,35 +37,18 @@ async function setup() {
 		}
 			let unsortedProducts = await response.json()
 			// TODO: Sort the products by price (low to high by default)
+			// products = unsortedProducts.sort((a, b) => a.price - b.price)
 			products = sortByPrice(unsortedProducts)
 			console.log(products)
 			addProducts()
-			
+
+			// Add listener for when a user types in the search box
+			search.addEventListener('keyup', addProducts)
 	} catch (error) {
 		console.error(error.message)
 	}
 	
 }
-
-// --------------- DOM UPDATING FUNCTIONS ---------------
-
-const addProducts = () => {
-	productsContainer.innerHTML = ''
-	// TODO: Render the products to the page in a responsive grid
-	products.forEach(product => createProductTile(product))
-}
-
-const createProductTile = (product) => {
-	// I was going to do this part using a chain of appends to differentiate from the last time I did this, but I really disliked it so I went this route again
-	productsContainer.innerHTML += 
-		`<div class="product-tile" key="${product.id}">
-          <img class="product-image" src="${product.images[0].src}" alt="${product.title} image"/>
-          <h3>${product.title}</h3>
-          <p>$${formatPrice((product.price))}</p>
-        </div>`
-}
-
-// --------------- UTILITY FUNCTIONS ---------------
 
 const formatPrice = (price) => {
 	// Format the price into the proper dollar amount
@@ -76,10 +60,32 @@ const sortByPrice = (products) => {
 	return products.sort((a, b) => a.price - b.price)
 }
 
+const filterProducts = () => {
+	// Grab the current filter from the text box
+	let filter = search.value
 
+	// Filter through the products array and return the new array
+	return products.filter((product) => product.title.toLowerCase().includes(filter.toLowerCase()))
+}
 
+// --------------- DOM UPDATING FUNCTIONS ---------------
 
+const addProducts = () => {
+	// Clear the current product selection
+	productsContainer.innerHTML = ''
+	// TODO: Render the products to the page in a responsive grid
+	filterProducts().forEach(product => createProductTile(product))
+}
 
+const createProductTile = (product) => {
+	// I was going to do this part using a chain of appends to differentiate from the last time I did this, but I really disliked it so I went this route again
+	productsContainer.innerHTML += 
+		`<div class="product-tile" key="${product.id}">
+          <img class="product-image" src="${product.images[0].src}" alt="${product.title} image"/>
+          <h3>${product.title}</h3>
+          <p>$${formatPrice((product.price))}</p>
+        </div>`
+}
 
 
 /**
