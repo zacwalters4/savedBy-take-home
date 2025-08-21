@@ -155,6 +155,6 @@ function messyFunction(data1, data2) {
 
 function sortByPrice(products, sortOrder) {
 	let direction = sortOrder === 'desc' ? -1 : 1
-	return [...products].sort((a, b) => direction * (a.price - b.price))
+	return [...products].sort((productOne, ProductTwo) => direction * (productOne.price - ProductTwo.price))
 }
 
