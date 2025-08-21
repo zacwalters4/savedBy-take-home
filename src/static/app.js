@@ -1,29 +1,79 @@
-window.addEventListener("DOMContentLoaded", setup);
 
+// If document is already loaded, don't listen for the event
+if (document.readyState !== "loading") {
+    setup()
+} else {
+    document.addEventListener("DOMContentLoaded", setup)
+}
+
+
+// --------------- QUERY SELECTORS ---------------
+let productsContainer = document.querySelector('.products-container')
+
+// --------------- DATA MODEL ---------------
+
+let products
+
+// --------------- UTILITY FUNCTIONS ---------------
 async function setup() {
+
 	// START HERE
 	// API Endpoint: GET /products
 	// Returns: Array of product objects with id, title, price (in cents), and array of images
-	// TODO: Fetch products from the API
-	// TODO: Render the products to the page in a responsive grid
+	
 	// TODO: Sort the products by price (low to high by default)
 	// TODO: Implement search functionality
 	// BONUS: Use the refactored sorting function for dynamic sort order
 	// BONUS: Add error handling for the fetch request
 
 
-	// Fetch the products list from the API
+
+	// TODO: Fetch products from the API with added error handling
 	try {
 		const response = await fetch('/products', {method: 'GET'})
 		if(!response.ok) {
 			throw new Error(`Response status: ${response.status}`)
 		}
-			const result = await response.json()
-			console.log(result)
+			products = await response.json()
+			console.log(products)
+			addProducts()
+			
 	} catch (error) {
 		console.error(error.message)
 	}
+	
 }
+
+// --------------- DOM UPDATING FUNCTIONS ---------------
+
+const addProducts = () => {
+	productsContainer.innerHTML = ''
+	// TODO: Render the products to the page in a responsive grid
+	products.forEach(product => createProductTile(product))
+}
+
+const createProductTile = (product) => {
+	// I was going to do this part using a chain of appends to differentiate from the last time I did this, but I really disliked it so I went this route again
+	productsContainer.innerHTML += 
+		`<div class="product-tile" key="${product.id}">
+          <img class="product-image" src="${product.images[0].src}" alt="${product.title} image"/>
+          <h3>${product.title}</h3>
+          <p>$${formatPrice((product.price))}</p>
+        </div>`
+}
+
+// --------------- UTILITY FUNCTIONS ---------------
+
+const formatPrice = (price) => {
+	// Fucntion to format the price properly
+	return (price/100).toFixed(2)
+}
+
+
+
+
+
+
 
 /**
  * Sorts an array of products by price in ascending or descending order.

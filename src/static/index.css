@@ -40,7 +40,7 @@ h1 {
 
 main {
     /* Ensuring the main section of the web page spans the entire width of the page and centers the items inside of it */
-    width: 100vw;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -63,7 +63,30 @@ h2 {
 }
 
 .products-container {
-    background-color: #67B6F9;
-    width: 98%;
-    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 70%;
+}
+
+.product-tile {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 25%;
+}
+
+.product-image {
+    width: 90%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+}
+
+h3 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+p {
+    margin: 0;
 }
