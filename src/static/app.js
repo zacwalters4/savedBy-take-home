@@ -63,6 +63,7 @@ const filterProducts = () => {
 	let filter = search.value
 
 	// Filter through the products array and return the new array
+	// toLowerCase is used to make the filter case-insensitive
 	return products.filter((product) => product.title.toLowerCase().includes(filter.toLowerCase()))
 }
 
@@ -152,7 +153,7 @@ function secondSortByPrice(products, sortOrder) {
 	}
 }
 
-// Step 3: Ideally a shallow copy of the array is used instead of modifying the array, and the double if statement can be refactored.
+// Step 3: Ideally a shallow copy of the array is used instead of modifying the original array, and the double if statement can also be refactored.
 
 function thirdSortByPrice(products, sortOrder) {
 	let direction = sortOrder === 'desc' ? -1 : 1
