@@ -4,16 +4,25 @@ document.addEventListener("DOMContentLoaded", setup)
 
 let productsContainer
 let search 
+let sortSelect
 
 // --------------- DATA MODEL ---------------
 
 let products
+let sortSelectValue
 
 // --------------- UTILITY FUNCTIONS ---------------
 
 async function setup() {
 	productsContainer = document.querySelector('.products-container')
 	search = document.querySelector('.product-search')
+	sortSelect = document.getElementById('product-sort')
+	// Add event listener onto the sort select to change products list on change
+	sortSelect.addEventListener('change', () => {
+		sortSelectValue = sortSelect.value
+		products = sortByPrice(products, sortSelectValue)
+		addProducts()
+	})
 	// START HERE
 	// API Endpoint: GET /products
 	// Returns: Array of product objects with id, title, price (in cents), and array of images
@@ -29,7 +38,7 @@ async function setup() {
 			// TODO: Sort the products by price (low to high by default)
 			// products = unsortedProducts.sort((a, b) => a.price - b.price)
 			// BONUS: Use the refactored sorting function for dynamic sort order
-			products = sortByPrice(unsortedProducts, 'asc')
+			products = sortByPrice(unsortedProducts, sortSelectValue)
 			addProducts()
 
 			// Add listener for when a user types in the search box
@@ -37,6 +46,8 @@ async function setup() {
 	} catch (error) {
 		console.error(error.message)
 	}
+
+	console.log(sortSelect.value)
 }
 
 const formatPrice = (price) => {

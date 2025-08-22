@@ -56,10 +56,18 @@ main {
     border-radius: 4px;
 }
 
-h2 {
-    /* Setting the width of the header to align it with the product search box */
+.product-sort-container {
     width: 98%;
+    display: flex;
+    align-items: center;
+}
+
+h2 {
     font-size: 1.8rem;
+}
+
+select {
+    margin-left: 5%;
 }
 
 .products-container {

@@ -17,7 +17,15 @@
   </header>
   <main>
     <input class="product-search" type="text" id="products" placeholder="Search products..." >
-    <h2>Products</h2>
+    <div class="product-sort-container">
+      <h2>Products</h2>
+      <!-- Add a product sort selection dropdown to the webpage -->
+      <select name="product-sort" id="product-sort">
+        <option value="asc">Sort by Price: Low to High</option>
+        <option value="desc">Sort by Price: High to Low</option>
+      </select>
+    </div>
+    
     <!-- This container be populated with our product tiles -->
     <div class="products-container"></div>
   </main>
