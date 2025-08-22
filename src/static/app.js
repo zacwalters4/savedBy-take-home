@@ -1,15 +1,9 @@
-
-// If document is already loaded, don't listen for the event
-if (document.readyState !== "loading") {
-    setup()
-} else {
-    document.addEventListener("DOMContentLoaded", setup)
-}
+document.addEventListener("DOMContentLoaded", setup)
 
 // --------------- QUERY SELECTORS ---------------
 
-let productsContainer = document.querySelector('.products-container')
-let search = document.querySelector('.product-search')
+let productsContainer
+let search 
 
 // --------------- DATA MODEL ---------------
 
@@ -18,7 +12,8 @@ let products
 // --------------- UTILITY FUNCTIONS ---------------
 
 async function setup() {
-
+	productsContainer = document.querySelector('.products-container')
+	search = document.querySelector('.product-search')
 	// START HERE
 	// API Endpoint: GET /products
 	// Returns: Array of product objects with id, title, price (in cents), and array of images
@@ -42,7 +37,6 @@ async function setup() {
 	} catch (error) {
 		console.error(error.message)
 	}
-	
 }
 
 const formatPrice = (price) => {
