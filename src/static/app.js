@@ -75,13 +75,32 @@ const addProducts = () => {
 }
 
 const createProductTile = (product) => {
-	// I was going to do this part using a chain of appends to differentiate from the last time I did this, but I really disliked it so I went this route again
-	productsContainer.innerHTML += 
-		`<div class="product-tile" key="${product.id}">
-          <img class="product-image" src="${product.images[0].src}" alt="${product.title} image"/>
-          <h3>${product.title}</h3>
-          <p>$${formatPrice((product.price))}</p>
-        </div>`
+	// Create the div for the product
+	const productTile = document.createElement('div')
+	productTile.classList.add('product-tile')
+	productTile.setAttribute('key', product.id)
+
+	// Create the image element
+	const productImage = document.createElement('img')
+	productImage.classList.add('product-image')
+	productImage.src = product.images[0].src
+	productImage.alt = `${product.title} image`
+
+	// Create the title element
+	const productTitle = document.createElement('h3')
+	productTitle.textContent = product.title
+
+	// Create the price element
+	const productPrice = document.createElement('p')
+	productPrice.textContent = `$${formatPrice(product.price)}`
+
+	// Append elements to the productTile div
+	productTile.appendChild(productImage)
+	productTile.appendChild(productTitle)
+	productTile.appendChild(productPrice)
+
+	// Append the productTile to the products container
+	productsContainer.appendChild(productTile)
 }
 
 /**
