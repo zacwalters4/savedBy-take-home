@@ -46,8 +46,6 @@ async function setup() {
 	} catch (error) {
 		console.error(error.message)
 	}
-
-	console.log(sortSelect.value)
 }
 
 const formatPrice = (price) => {
